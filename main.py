@@ -10,8 +10,6 @@ from Crypto.Cipher import AES
 from Crypto.Util.Padding import pad, unpad
 import os
 import base64
-from pyrogram import Client
-from pyrogram import Filters
 import sys
 import re
 import requests
