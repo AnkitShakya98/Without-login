@@ -1663,9 +1663,8 @@ async def process_appxwp(bot: Client, m: Message, user_id: int):
             await CONNECTOR.close()
 
 
-# Start Flask + Bot
+bot.run()
 if __name__ == "__main__":
-    threading.Thread(target=run_flask).start()
-    bot.run()
+    asyncio.run(main())
                                         
 
