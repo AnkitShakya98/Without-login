@@ -1655,9 +1655,32 @@ async def process_appxwp(bot: Client, m: Message, user_id: int):
                 await session.close()
             await CONNECTOR.close()
 
+# === END OF FILE: Flask + Pyrogram bot runner ===
+from flask import Flask
+import threading
+import asyncio
+
+# Flask app for Render/Keepalive
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return "✅ Telegram Bot is running successfully on Render!"
+
+def run_flask():
+    """Run Flask server on port 8080 (Render default)"""
+    app.run(host="0.0.0.0", port=8080)
+
 if __name__ == "__main__":
-    import asyncio
+    # --- Python 3.14 asyncio fix ---
     try:
         asyncio.get_running_loop()
     except RuntimeError:
         asyncio.set_event_loop(asyncio.new_event_loop())
+
+    # --- Start Flask server in a background thread ---
+    threading.Thread(target=run_flask, daemon=True).start()
+
+    # --- Start Telegram Bot ---
+    print("🚀 Starting Telegram Bot...")
+    bot.run()
