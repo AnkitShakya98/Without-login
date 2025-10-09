@@ -36,9 +36,6 @@ from datetime import datetime
 import time
 from concurrent.futures import ThreadPoolExecutor
 THREADPOOL = ThreadPoolExecutor(max_workers=1000)
-import logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
-
 
 # Bot credentials from environment variables (Render compatible)
 API_ID = int(os.environ.get("API_ID", 24473318))
@@ -48,16 +45,39 @@ BOT_TOKEN = os.environ.get("BOT_TOKEN", "8034069514:AAHUBpzSCq41jPwsJkDbXuEoVC_y
 # Initialize Bot Globally (IMPORTANT FIX)
 bot = Client("bot", api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
 
-# Flask app for Render
+from flask import Flask, jsonify, request
+import logging
+
+# -------------------------------
+# Logging Configuration
+# -------------------------------
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(message)s"
+)
+logging.info("Flask app is loading...")
+
+# -------------------------------
+# Flask App Initialization
+# -------------------------------
 app = Flask(__name__)
 
-@app.route('/')
+# -------------------------------
+# Routes / Endpoints
+# -------------------------------
+@app.route("/")
 def home():
-    return "Bot is running!"
+    return jsonify({"message": "Hello, World! App is running on Koyeb!"})
 
-def run_flask():
-    app.run(host="0.0.0.0", port=1000) #Use 8080 Port here, if you're deploying it on koyeb
-    
+@app.route("/ping")
+def ping():
+    return jsonify({"status": "ok"})
+
+@app.route("/echo", methods=["POST"])
+def echo():
+    data = request.json
+    return jsonify({"received": data})
+
 
 image_list = [
 "https://graph.org/file/8b1f4146a8d6b43e5b2bc-be490579da043504d5.jpg",
@@ -1665,9 +1685,7 @@ async def process_appxwp(bot: Client, m: Message, user_id: int):
             await CONNECTOR.close()
 
 
-# Start Flask + Bot
-if __name__ == "__main__":
-    threading.Thread(target=run_flask).start()
-    app.run()
+
                                         
+logging.info("Flask app loaded successfully! Ready to serve requests.")
 
