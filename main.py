@@ -1683,4 +1683,4 @@ if __name__ == "__main__":
 
     # --- Start Telegram Bot ---
     print("🚀 Starting Telegram Bot...")
-    bot.run()
+    app.run()
