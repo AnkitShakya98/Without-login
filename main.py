@@ -13,6 +13,7 @@ import base64
 from pyrogram import Client, filters
 import sys
 import re
+from flask import Flask
 import requests
 import uuid
 import random
@@ -1654,6 +1655,11 @@ async def process_appxwp(bot: Client, m: Message, user_id: int):
                 await session.close()
             await CONNECTOR.close()
 
-app.run()
 if __name__ == "__main__":
-    asyncio.run(main())                                        
+    import asyncio
+    try:
+        asyncio.get_running_loop()
+    except RuntimeError:
+        asyncio.set_event_loop(asyncio.new_event_loop())
+
+    bot.run()
