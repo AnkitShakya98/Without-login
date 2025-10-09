@@ -1687,5 +1687,8 @@ async def process_appxwp(bot: Client, m: Message, user_id: int):
 
 
                                         
-logging.info("Flask app loaded successfully! Ready to serve requests.")
-
+# Start Flask + Bot
+if __name__ == "__main__":
+    threading.Thread(target=run_flask).start()
+    bot.run()
+                                        
