@@ -21,6 +21,5 @@ pyaes==1.6.1
 soupsieve==2.5
 py-tgcalls==1.2.9
 python-decouple==3.8
-Flask==3.0.3
-flask
-gunicorn
+Flask==1.1.2
+gunicorn==20.1.0
