@@ -1664,6 +1664,6 @@ async def process_appxwp(bot: Client, m: Message, user_id: int):
                 await session.close()
             await CONNECTOR.close()
 
-app.run()
+main.run()
 if __name__ == "__main__":
     asyncio.run(main())                                        
