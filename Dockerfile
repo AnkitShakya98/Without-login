@@ -4,5 +4,4 @@ COPY requirements.txt requirements.txt
 WORKDIR .
 COPY . .
 RUN pip3 install -r requirements.txt
-CMD if __name__ == "__main__":
-    asyncio.run(main())
+CMD gunicorn app:app & python3 main.py
