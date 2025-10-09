@@ -56,7 +56,7 @@ def home():
     return "Bot is running!"
 
 def run_flask():
-    app.run(host="0.0.0.0", port=1000) #Use 8080 Port here, if you're deploying it on koyeb
+    app.run(host="0.0.0.0", port=8080) #Use 8080 Port here, if you're deploying it on koyeb
     
 
 image_list = [
@@ -1665,9 +1665,7 @@ async def process_appxwp(bot: Client, m: Message, user_id: int):
             await CONNECTOR.close()
 
 
-# Start Flask + Bot
+bot.run()
 if __name__ == "__main__":
-    threading.Thread(target=run_flask).start()
-    bot.run()
-                                        
+    asyncio.run(main())
 
