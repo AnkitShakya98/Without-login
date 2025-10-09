@@ -17,8 +17,8 @@ import uuid
 import random
 import string
 import hashlib
+from pyrogram import Client, filters
 from flask import Flask
-import threading
 from pyrogram.types.messages_and_media import message
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from pyrogram.errors import FloodWait
@@ -33,8 +33,7 @@ from pyrogram.raw.functions.channels import GetParticipants
 from config import api_id, api_hash, bot_token, auth_users
 from datetime import datetime
 import time
-from concurrent.futures import ThreadPoolExecutor
-THREADPOOL = ThreadPoolExecutor(max_workers=1000)
+
 import logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
